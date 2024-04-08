@@ -1,0 +1,48 @@
+.title{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: white;
+}
+
+.content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.table-wrapper {
+    max-height: 60vh; /* Establece la altura máxima */
+    overflow-y: auto; /* Añade scroll vertical cuando se supera la altura máxima */
+    width: 80%; /* Ancho de la tabla */
+    margin: auto; /* Centra horizontalmente la tabla */
+}
+
+table {
+    background-color: white;
+    color: black;
+    font-family: arial, sans-serif;
+    border: solid;
+    width: 100%;
+    border-radius: 5px;
+    margin: auto; 
+}
+
+thead {
+    background-color: white;
+    position: sticky; 
+    top: 0; 
+    z-index: 1; 
+}
+
+td, th {
+    border: 1px solid #000000;
+    text-align: center;
+    padding: 8px;
+}
+
+button{
+    border: solid 1px;
+}

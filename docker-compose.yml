@@ -1,0 +1,56 @@
+version: '3'
+services:
+  app:
+    build:
+      context: frontend/.
+      dockerfile: Dockerfile
+    image: ${APP_NAME}-fe
+    container_name: ${APP_NAME}-fe
+    volumes:
+      - ./frontend:/app/${APP_NAME}-fe
+    ports: 
+      - "4200:4200"
+    networks:
+      - network # Conecta este servicio a la red ${APP_NAME}-network
+
+  dotnet:
+    build:
+      context: backend/.
+      dockerfile: Dockerfile
+    image: ${APP_NAME}-webapi
+    container_name: ${APP_NAME}-webapi
+    volumes:
+      - ./backend:/app/Slamdunk.WebApi
+    ports: 
+      - "5214:5214"
+    networks:
+      - network # Conecta este servicio a la red ${APP_NAME}-network
+
+  pgadmin:
+    build:
+      context: ./postgresdb/pgadmin
+    container_name: pgadmin
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+    ports:
+      - "80:80"
+    networks:
+      - network
+
+  postgres:
+    build:
+      context: ./postgresdb/postgres
+    container_name: postgres
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin
+      POSTGRES_DB: admindb
+    ports:
+      - "5432:5432"
+    networks:
+      - network
+
+networks:
+  network: # Define la red ${APP_NAME}-network
+    driver: bridge # Utiliza el driver de red 'bridge' por defecto

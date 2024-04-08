@@ -1,0 +1,33 @@
+<div class="title">
+    <h1>Tabla del API</h1>
+</div>
+<div class="content">
+    <div class="table-wrapper">
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Edad</th>
+                    <th>Detalle</th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (User of Users; track User.id) {
+                <tr>
+                    <td>
+                        {{User.id}}
+                    </td>
+                    <td>
+                        {{User.name}}
+                    </td>
+                    <td>
+                        {{User.age}}
+                    </td>
+                    <td><button class="w3-button" [routerLink]="['/detalle',User.id]">Ver detalle</button></td>
+                </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

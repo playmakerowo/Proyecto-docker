@@ -1,0 +1,18 @@
+!!! AL MOMENTO DE REGISTRAR EL SERVER EN PGADMIN CONCIDERAR EL HOST DEL SERVIDOR COMO EL NOMBRE DEL SERVICIO ES DECIR POSTGRES ¡¡¡
+En la pestaña "Connection", en el campo "Host name/address",
+escribe el nombre del servicio del contenedor de PostgreSQL. 
+Por defecto, Docker Compose utiliza el nombre del servicio como el nombre de host en la red interna de Docker.
+
+Por lo tanto, en este caso, puedes usar "postgres" como el nombre del host.
+
+ejemplo funcional (si no se cambian los dockerfile) para este caso:
+
+***PGADMIN***
+USER: admin@admin.com
+PASS: admin
+
+***SERVER***
+HOSTNAME: postgres
+PORT: 5432
+USER: admin
+PASS: admin
