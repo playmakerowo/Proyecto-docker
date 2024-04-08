@@ -14,10 +14,8 @@
                 <p class="name">Id:</p>
                 <p class="data id">{{ id }}</p>
             </div>
-            <!--<img src="https://t3.ftcdn.net/jpg/01/12/43/90/360_F_112439016_DkgjEftsYWLvlYtyl7gVJo1H9ik7wu1z.jpg" alt="">-->
-
             <div class="buttons">
-                <button class="w3-button">Modificar <i class="fa fa-pencil"></i> </button>
+                <button class="w3-button" [routerLink]="['/modificar',id]">Modificar <i class="fa fa-pencil"></i></button>
                 <button class="w3-button" (click)="borrarUsuario()">Borrar <i class="fa fa-times"></i></button>
             </div>
         </div>

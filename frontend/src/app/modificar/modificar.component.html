@@ -1,0 +1,21 @@
+<div class="content">
+    <h1>Modificar usuario: {{id}} </h1>
+    <div class="card-content">
+        <div class="card">
+            <div class="info">
+                <input type="text" placeholder="Nombre">
+            </div>
+            <div class="info">
+                <input type="number" placeholder="Edad">
+            </div>
+            <div class="info info-id">
+                <p class="id">Id (no modificabale):</p>
+                <p class="data id">{{ id }}</p>
+            </div>
+            <div class="buttons">
+                <button class="w3-button" [routerLink]="['/detalle',id]">Cancelar <i class="fa fa-times"></i> </button>
+                <button class="w3-button">Modificar <i class="fa fa-pencil"></i> </button>
+            </div>
+        </div>
+    </div>
+</div>
