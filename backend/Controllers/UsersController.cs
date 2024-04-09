@@ -44,12 +44,12 @@ public class UsersController : ControllerBase
 
     // Pasar parametros del usuario por URL
     [HttpPut("{id}")]
-    public async Task<IActionResult> UpdateUsuario(int id, string name, int edad)
+    public async Task<IActionResult> UpdateUsuario(User Usuario)
     {
         try
         {
             // Buscar al Usuario por su ID
-            var usuarioExistente = await _context.Users.FindAsync(id);
+            var usuarioExistente = await _context.Users.FindAsync(Usuario.Id);
 
             //validar que exista el usuario
             if (usuarioExistente == null)
@@ -58,13 +58,13 @@ public class UsersController : ControllerBase
             }
 
             // Actualizar los campos del usuario existente con los valores proporcionados
-            usuarioExistente.Name = name;
-            usuarioExistente.Age = edad;
+            usuarioExistente.Name = Usuario.Name;
+            usuarioExistente.Age = Usuario.Age;
 
             // Guardar los cambios en la base de datos
             await _context.SaveChangesAsync();
 
-            return Ok(usuarioExistente + "modificado con exito"); // Operación exitosa
+            return Ok(); // Operación exitosa
         }
         catch (Exception ex)
         {

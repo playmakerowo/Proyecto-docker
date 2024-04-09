@@ -41,8 +41,19 @@ td, th {
     border: 1px solid #000000;
     text-align: center;
     padding: 8px;
+    max-width: 25vh;
 }
 
-button{
-    border: solid 1px;
+button {
+    cursor: pointer;
+    color: white;
+    background-color: black;
+    border-radius: 8px;
+    max-width: 150px;
+    margin: 2px;
+    transition: background-color .4s, color .4s, transform .1s;
+
+    &:hover {
+        color: white;
+    }
 }

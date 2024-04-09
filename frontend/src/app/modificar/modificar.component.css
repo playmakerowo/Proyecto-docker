@@ -40,7 +40,7 @@ h1 {
 
 
 .card {
-    width: 300px;
+    width: 400px;
     height: auto;
     padding: 10px;
     background-color: #f9f9f9;
@@ -75,13 +75,14 @@ h1 {
         width: 100%;
         display: flex;
         margin-top: 10px;
+        justify-content: center;
         button {
             cursor: pointer;
             color: white;
             background-color: black;
             border-radius: 8px;
             margin: 2px;
-            width: 100%;
+            max-width: 150px;
             transition: background-color .4s, color .4s, transform .1s;
 
             &:hover {

@@ -23,4 +23,12 @@ export class ApiControllerService {
   removeUser(id: number): Observable<Users>{
     return this.http.delete<Users>(this.apiGetUser + id);
   }
+
+  createUser(listaUsuarios: any): Observable<Users>{
+    return this.http.post<Users>(this.apiGetList, listaUsuarios);
+  }
+
+  updateUser(id: number, listaUsuarios: any): Observable<Users>{
+    return this.http.put<Users>(this.apiGetUser + id, listaUsuarios)
+  }
 }

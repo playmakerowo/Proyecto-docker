@@ -3,18 +3,18 @@
     <div class="card-content">
         <div class="card">
             <div class="info">
-                <input type="text" placeholder="Nombre">
+                <input type="text" value="{{Name}}" [(ngModel)]="Name">
             </div>
             <div class="info">
-                <input type="number" placeholder="Edad">
+                <input type="number" value="{{Age}}" [(ngModel)]="Age">
             </div>
             <div class="info info-id">
                 <p class="id">Id (no modificabale):</p>
                 <p class="data id">{{ id }}</p>
             </div>
             <div class="buttons">
-                <button class="w3-button" [routerLink]="['/detalle',id]">Cancelar <i class="fa fa-times"></i> </button>
-                <button class="w3-button">Modificar <i class="fa fa-pencil"></i> </button>
+                <app-btn-volver></app-btn-volver>
+                <button class="w3-button" (click)="modificarUsuario()">Modificar <i class="fa fa-pencil"></i> </button>
             </div>
         </div>
     </div>

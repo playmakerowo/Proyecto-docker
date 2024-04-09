@@ -15,10 +15,10 @@
                 <p class="data id">{{ id }}</p>
             </div>
             <div class="buttons">
+                <app-btn-volver></app-btn-volver>
                 <button class="w3-button" [routerLink]="['/modificar',id]">Modificar <i class="fa fa-pencil"></i></button>
-                <button class="w3-button" (click)="borrarUsuario()">Borrar <i class="fa fa-times"></i></button>
+                <app-btn-eliminar [id]="id"></app-btn-eliminar>
             </div>
         </div>
     </div>
-    <button class="w3-button" routerLink="/tabla">Volver a tabla</button>
 </div>

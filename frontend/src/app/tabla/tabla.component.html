@@ -24,7 +24,11 @@
                     <td>
                         {{User.age}}
                     </td>
-                    <td><button class="w3-button" [routerLink]="['/detalle',User.id]">Ver detalle</button></td>
+                    <td>
+                        <button class="w3-button" [routerLink]="['/detalle',User.id]">Ver detalle <i class="fa fa-eye"></i></button>
+                        <button class="w3-button" [routerLink]="['/modificar',User.id]">Modificar <i class="fa fa-pencil"></i></button>
+                        <app-btn-eliminar [id]="User.id"></app-btn-eliminar>
+                    </td>
                 </tr>
                 }
             </tbody>
