@@ -2,6 +2,9 @@ using Data;
 using Microsoft.AspNetCore.Mvc;
 using Models;
 using Microsoft.EntityFrameworkCore;
+using iTextSharp.text;
+using iTextSharp.text.pdf;
+using System.IO;
 
 namespace Slamdunk.Controllers;
 
@@ -15,6 +18,35 @@ public class UsersController : ControllerBase
     {
         _context = context;
     }
+
+    [HttpGet("pdf" + "{id}")]
+    public async Task<ActionResult> GetPdf(int id)
+    {
+        var Usuario = await _context.Users.FindAsync(id);
+        string fileName = $"Detalle-{Usuario.Name}.pdf";
+        string directoryPath = Path.Combine(Directory.GetCurrentDirectory(), "archivos-pdf");
+        string filePath = Path.Combine(directoryPath, fileName);
+
+        // Crear la carpeta si no existe
+        Directory.CreateDirectory(directoryPath);
+
+        // Crear el contenido del PDF y guardarlo en disco
+        using (var fileStream = new FileStream(filePath, FileMode.Create))
+        {
+            Document doc = new Document();
+            PdfWriter.GetInstance(doc, fileStream);
+            doc.Open();
+            doc.Add(new Paragraph("Detalle del Usuario"));
+            doc.Add(new Paragraph($"Nombre: {Usuario.Name}"));
+            doc.Add(new Paragraph($"Edad: {Usuario.Age}"));
+            doc.Add(new Paragraph($"ID: {Usuario.Id}"));
+            doc.Close();
+        }
+
+        // Devolver el archivo PDF como resultado
+        return PhysicalFile(filePath, "application/pdf", fileName);
+    }
+
 
     // Listar Usuario
     [HttpGet]

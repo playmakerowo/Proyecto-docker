@@ -208,3 +208,13 @@
 /home/jorge/frontAngular/backend/obj/Debug/net8.0/Slamdunk.WebApi.pdb
 /home/jorge/frontAngular/backend/obj/Debug/net8.0/Slamdunk.WebApi.genruntimeconfig.cache
 /home/jorge/frontAngular/backend/obj/Debug/net8.0/ref/Slamdunk.WebApi.dll
+/app/Slamdunk.WebApi/bin/Debug/net8.0/Select.Html.dep
+/app/Slamdunk.WebApi/bin/Debug/net8.0/BouncyCastle.Crypto.dll
+/app/Slamdunk.WebApi/bin/Debug/net8.0/itextsharp.dll
+/app/Slamdunk.WebApi/bin/Debug/net8.0/Microsoft.Win32.SystemEvents.dll
+/app/Slamdunk.WebApi/bin/Debug/net8.0/Newtonsoft.Json.dll
+/app/Slamdunk.WebApi/bin/Debug/net8.0/Select.HtmlToPdf.dll
+/app/Slamdunk.WebApi/bin/Debug/net8.0/System.Drawing.Common.dll
+/app/Slamdunk.WebApi/bin/Debug/net8.0/runtimes/win/lib/netcoreapp2.0/Microsoft.Win32.SystemEvents.dll
+/app/Slamdunk.WebApi/bin/Debug/net8.0/runtimes/unix/lib/netcoreapp2.0/System.Drawing.Common.dll
+/app/Slamdunk.WebApi/bin/Debug/net8.0/runtimes/win/lib/netcoreapp2.0/System.Drawing.Common.dll

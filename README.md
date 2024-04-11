@@ -4,8 +4,9 @@
 Proyecto con tecnologias que se buscan correr directamente desde docker 
 
 ## Instrucciones Backend y Frontend
-* Antes de correr el archivo docker compose es importante eliminar los volumenes del front y del back end (esto para que se puedan generar los archivos necesarios dentro de los contenedores)
-Estad dos lineas: 
+* Antes de correr el archivo docker compose es importante eliminar los volumenes del front y del backend (esto para que se puedan generar los archivos necesarios dentro de los contenedores)
+
+demtro del Docker-compose comentar: 
 
     volumes:
       - ./frontend:/app/${APP_NAME}-fe
@@ -27,7 +28,7 @@ Estad dos lineas:
 * Credenciales:
     * User: admin@admin.com
     * Pass: admin
-* Credenciales de conexcion pgdb:
+* Credenciales de conexion pgdb:
     * HOSTNAME: postgres (el nombre es ya que viene desde un contenedor con ese nombre)
     * PORT: 5432
     * USER: admin

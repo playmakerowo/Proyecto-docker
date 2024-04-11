@@ -30,7 +30,7 @@ button {
 }
 
 .background {
-    background-image: url('https://redgol.cl/__export/1681573346722/sites/redgol/img/2023/04/15/dia_nublado-santiago-clima_crop1681573344179.jpg_242310155.jpg');
+    background-image: url('https://motionbgs.com/media/1031/paradise-sunset.jpg');
     min-height: 80vh; /* Cambiamos a viewport height (altura de la ventana del navegador) */
     background-attachment: fixed;
     background-size: cover; /* La imagen de fondo se ajustará para cubrir todo el contenedor */

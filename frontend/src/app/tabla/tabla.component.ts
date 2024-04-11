@@ -14,13 +14,10 @@ import { BtnEliminarComponent } from '../btn-eliminar/btn-eliminar.component';
 export class TablaComponent implements OnInit{
   Users: Users[] = [];
 
-  constructor(private _usuarios: ApiControllerService){
-
-  }
+  constructor(private _usuarios: ApiControllerService){ }
   
   ngOnInit(): void {
     this._usuarios.getUsers().subscribe((data: Users[]) => {this.Users = data
-    console.log(data)
     })
   }
 }
