@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Slamdunk.WebApi")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+fc179e59d1c39decdf6e1db90d5279a4c10f0997")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
 [assembly: System.Reflection.AssemblyProductAttribute("Slamdunk.WebApi")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Slamdunk.WebApi")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

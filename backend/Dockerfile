@@ -13,6 +13,8 @@ WORKDIR /app/Slamdunk.WebApi
 RUN dotnet add package Microsoft.EntityFrameworkCore.Design
 RUN dotnet add package Npgsql.EntityFrameworkCore.PostgreSQL
 RUN dotnet add package Swashbuckle.AspNetCore
+RUN dotnet add package itext7.pdfhtml
+RUN dotnet add package itext7.bouncy-castle-adapter
 
 # Build the application
 RUN dotnet build

@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using iTextSharp.text;
 using iTextSharp.text.pdf;
 using System.IO;
+using iText.Html2pdf;
 
 namespace Slamdunk.Controllers;
 
@@ -18,35 +19,6 @@ public class UsersController : ControllerBase
     {
         _context = context;
     }
-
-    [HttpGet("pdf" + "{id}")]
-    public async Task<ActionResult> GetPdf(int id)
-    {
-        var Usuario = await _context.Users.FindAsync(id);
-        string fileName = $"Detalle-{Usuario.Name}.pdf";
-        string directoryPath = Path.Combine(Directory.GetCurrentDirectory(), "archivos-pdf");
-        string filePath = Path.Combine(directoryPath, fileName);
-
-        // Crear la carpeta si no existe
-        Directory.CreateDirectory(directoryPath);
-
-        // Crear el contenido del PDF y guardarlo en disco
-        using (var fileStream = new FileStream(filePath, FileMode.Create))
-        {
-            Document doc = new Document();
-            PdfWriter.GetInstance(doc, fileStream);
-            doc.Open();
-            doc.Add(new Paragraph("Detalle del Usuario"));
-            doc.Add(new Paragraph($"Nombre: {Usuario.Name}"));
-            doc.Add(new Paragraph($"Edad: {Usuario.Age}"));
-            doc.Add(new Paragraph($"ID: {Usuario.Id}"));
-            doc.Close();
-        }
-
-        // Devolver el archivo PDF como resultado
-        return PhysicalFile(filePath, "application/pdf", fileName);
-    }
-
 
     // Listar Usuario
     [HttpGet]
@@ -129,4 +101,91 @@ public class UsersController : ControllerBase
             return StatusCode(500, $"Error al eliminar el usuario: {ex.Message}");
         }
     }
+
+    //PDF HTML
+    [HttpGet("pdfHtml")]
+    public async Task<ActionResult> GetPdfhtml()
+    {
+        string origen = Path.Combine(Directory.GetCurrentDirectory(), "archivos-pdf/plantillas/plantilla.html");
+        string salida = Path.Combine(Directory.GetCurrentDirectory(), "archivos-pdf");
+
+        // Crear la carpeta si no existe
+        Directory.CreateDirectory(salida);
+
+        var htmlFilePath = Path.Combine(origen);
+        var pdfDest = Path.Combine(salida, "plantilla.pdf");
+
+        // Convertir HTML a PDF
+        using (FileStream htmlStream = new FileStream(htmlFilePath, FileMode.Open, FileAccess.Read, FileShare.Read))
+        using (FileStream pdfStream = new FileStream(pdfDest, FileMode.Create))
+        {
+            HtmlConverter.ConvertToPdf(htmlStream, pdfStream);
+        }
+
+        // Retornar el archivo PDF generado
+        byte[] pdfBytes = System.IO.File.ReadAllBytes(pdfDest);
+        return File(pdfBytes, "application/pdf", "plantilla.pdf");
+    }
+
+    // Listar Usuario pdf
+    [HttpGet("pdf")]
+    public async Task<ActionResult> GetPdf()
+    {
+        var Usuarios = await _context.Users.ToListAsync();
+        string fileName = $"ListOfUsers.pdf";
+        string directoryPath = Path.Combine(Directory.GetCurrentDirectory(), "archivos-pdf");
+        string filePath = Path.Combine(directoryPath, fileName);
+
+        // Crear la carpeta si no existe
+        Directory.CreateDirectory(directoryPath);
+
+        // Crear el contenido del PDF y guardarlo en disco
+        using (var fileStream = new FileStream(filePath, FileMode.Create))
+        {
+            Document doc = new Document();
+            PdfWriter.GetInstance(doc, fileStream);
+            doc.Open();
+            doc.Add(new Paragraph("Detalle del Usuario"));
+            foreach (var usuario in Usuarios)
+            {
+                doc.Add(new Paragraph($"Id Usuario: {usuario.Id}"));
+                doc.Add(new Paragraph($"Nombre: {usuario.Name}, Edad: {usuario.Age}")); // Suponiendo que la clase User tiene propiedades Nombre y Edad
+                doc.Add(new Paragraph($" "));
+            }
+            doc.Close();
+        }
+
+        // Devolver el archivo PDF como resultado
+        return PhysicalFile(filePath, "application/pdf", fileName);
+    }
+
+    //Usuario pdf
+    [HttpGet("pdf" + "{id}")]
+    public async Task<ActionResult> GetPdf(int id)
+    {
+        var Usuario = await _context.Users.FindAsync(id);
+        string fileName = $"Detalle-{Usuario.Name}.pdf";
+        string directoryPath = Path.Combine(Directory.GetCurrentDirectory(), "archivos-pdf");
+        string filePath = Path.Combine(directoryPath, fileName);
+
+        // Crear la carpeta si no existe
+        Directory.CreateDirectory(directoryPath);
+
+        // Crear el contenido del PDF y guardarlo en disco
+        using (var fileStream = new FileStream(filePath, FileMode.Create))
+        {
+            Document doc = new Document();
+            PdfWriter.GetInstance(doc, fileStream);
+            doc.Open();
+            doc.Add(new Paragraph("Detalle del Usuario"));
+            doc.Add(new Paragraph($"Nombre: {Usuario.Name}"));
+            doc.Add(new Paragraph($"Edad: {Usuario.Age}"));
+            doc.Add(new Paragraph($"ID: {Usuario.Id}"));
+            doc.Close();
+        }
+
+        // Devolver el archivo PDF como resultado
+        return PhysicalFile(filePath, "application/pdf", fileName);
+    }
+
 }
