@@ -15,6 +15,7 @@ WORKDIR /app/slamdunk-fe
 
 # Install the project dependencies
 RUN npm install sweetalert2
+RUN npm i --save-dev @types/file-saver
 RUN npm install
 
 # Expose the port the app runs on

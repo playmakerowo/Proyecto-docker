@@ -6,6 +6,7 @@ import { CommonModule } from '@angular/common';
 import Swal from 'sweetalert2'
 import { BtnEliminarComponent } from '../btn-eliminar/btn-eliminar.component';
 import { BtnVolverComponent } from '../btn-volver/btn-volver.component';
+import { saveAs } from 'file-saver';
 
 @Component({
   selector: 'app-detalle',
@@ -37,6 +38,14 @@ export class DetalleComponent implements OnInit {
       this.Age = this.User?.age
       console.log(this.User)
     })
+  }
+
+  descargarPDF() {
+    this._usuarios.getUserPdf(this.id).subscribe(
+      (pdfBlob: Blob) => {
+        saveAs(pdfBlob, this.Name + '-detalle.pdf');
+      },
+    );
   }
   
 }

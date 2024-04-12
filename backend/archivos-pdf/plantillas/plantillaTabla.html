@@ -1,0 +1,55 @@
+<body class="background">
+	<div class="container">
+		<h1>Tabla de usuarios {{fecha}} </h1>
+		<table>
+			<thead>
+				<tr>
+					<th>Id Usuario</th>
+					<th>Nombre</th>
+					<th>Edad</th>
+				</tr>
+			</thead>
+			<tbody>
+				{{usuarios_table}}
+			</tbody>
+		</table>
+	</div>
+</body>
+
+<style>
+	body {
+		background-image: url('https://motionbgs.com/media/1031/paradise-sunset.jpg');
+	}
+
+	h1 {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		text-align: center;
+		color: white;
+	}
+
+	table {
+		background-color: white;
+		color: black;
+		font-family: arial, sans-serif;
+		border: solid;
+		width: 100%;
+		border-radius: 5px;
+		margin: auto;
+	}
+
+	thead {
+		background-color: white;
+		position: sticky;
+		top: 0;
+		z-index: 1;
+	}
+	td,
+	th {
+		border: 1px solid #000000;
+		text-align: center;
+		padding: 8px;
+		max-width: 25vh;
+	}
+</style>

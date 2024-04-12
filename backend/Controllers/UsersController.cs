@@ -6,6 +6,7 @@ using iTextSharp.text;
 using iTextSharp.text.pdf;
 using System.IO;
 using iText.Html2pdf;
+using System.Text;
 
 namespace Slamdunk.Controllers;
 
@@ -102,31 +103,6 @@ public class UsersController : ControllerBase
         }
     }
 
-    //PDF HTML
-    [HttpGet("pdfHtml")]
-    public async Task<ActionResult> GetPdfhtml()
-    {
-        string origen = Path.Combine(Directory.GetCurrentDirectory(), "archivos-pdf/plantillas/plantilla.html");
-        string salida = Path.Combine(Directory.GetCurrentDirectory(), "archivos-pdf");
-
-        // Crear la carpeta si no existe
-        Directory.CreateDirectory(salida);
-
-        var htmlFilePath = Path.Combine(origen);
-        var pdfDest = Path.Combine(salida, "plantilla.pdf");
-
-        // Convertir HTML a PDF
-        using (FileStream htmlStream = new FileStream(htmlFilePath, FileMode.Open, FileAccess.Read, FileShare.Read))
-        using (FileStream pdfStream = new FileStream(pdfDest, FileMode.Create))
-        {
-            HtmlConverter.ConvertToPdf(htmlStream, pdfStream);
-        }
-
-        // Retornar el archivo PDF generado
-        byte[] pdfBytes = System.IO.File.ReadAllBytes(pdfDest);
-        return File(pdfBytes, "application/pdf", "plantilla.pdf");
-    }
-
     // Listar Usuario pdf
     [HttpGet("pdf")]
     public async Task<ActionResult> GetPdf()
@@ -186,6 +162,101 @@ public class UsersController : ControllerBase
 
         // Devolver el archivo PDF como resultado
         return PhysicalFile(filePath, "application/pdf", fileName);
+    }
+
+    //PDF HTML
+    [HttpGet("pdfHtml")]
+    public async Task<ActionResult> GetPdfHtml()
+    {
+        //definimos el origen de la plantilla, la salida y los datos
+        string origen = Path.Combine(Directory.GetCurrentDirectory(), "archivos-pdf/plantillas/plantillaTabla.html");
+        string salida = Path.Combine(Directory.GetCurrentDirectory(), "archivos-pdf");
+        var Usuarios = await _context.Users.ToListAsync();
+
+        var pdfDest = Path.Combine(salida, "Tabla.pdf");
+
+        // Leer el contenido HTML de la plantilla
+        string htmlContent = await System.IO.File.ReadAllTextAsync(Path.Combine(origen));
+
+        // Generar la tabla de usuarios en HTML
+        StringBuilder usuariosTableHtml = new StringBuilder();
+        foreach (var usuario in Usuarios)
+        {
+            usuariosTableHtml.AppendLine("<tr>");
+            usuariosTableHtml.AppendLine($"<td>{usuario.Id}</td>");
+            usuariosTableHtml.AppendLine($"<td>{usuario.Name}</td>");
+            usuariosTableHtml.AppendLine($"<td>{usuario.Age}</td>");
+            usuariosTableHtml.AppendLine("</tr>");
+        }
+
+        // Reemplazar el marcador de posición con el nombre del usuario
+        htmlContent = htmlContent.Replace("{{usuarios_table}}", usuariosTableHtml.ToString());
+        htmlContent = htmlContent.Replace("{{fecha}}", ($"{DateTime.Now.ToString("dd-MM-yyyy")}"));
+
+        byte[] htmlBytes = Encoding.UTF8.GetBytes(htmlContent);
+
+        // Crear un MemoryStream a partir de los bytes del HTML modificado
+        using (MemoryStream htmlMemoryStream = new MemoryStream(htmlBytes))
+        {
+            // Convertir HTML a PDF
+            using (FileStream pdfStream = new FileStream(pdfDest, FileMode.Create))
+            {
+                // Usar el MemoryStream para convertir el HTML modificado a PDF
+                HtmlConverter.ConvertToPdf(htmlMemoryStream, pdfStream);
+            }
+        }
+        // Retornar el archivo PDF generado
+        byte[] pdfBytes = System.IO.File.ReadAllBytes(pdfDest);
+        return File(pdfBytes, "application/pdf", $"{DateTime.Now.ToString("dd-MM")}-Tabla-usuarios.pdf");
+    }
+
+    //PDF HTML POR ID
+    [HttpGet("pdfHtml/{id}")]
+    public async Task<ActionResult> GetPdfHtml(int id)
+    {
+        var usuario = await _context.Users.FindAsync(id);
+
+        if (usuario == null)
+        {
+            return NotFound(); // Si no se encuentra el usuario con el ID proporcionado
+        }
+
+        string fileName = $"Detalle-{usuario.Name}.pdf";
+        string origen = Path.Combine(Directory.GetCurrentDirectory(), "archivos-pdf/plantillas/plantillaTabla.html");
+        string salida = Path.Combine(Directory.GetCurrentDirectory(), "archivos-pdf");
+        var pdfDest = Path.Combine(salida, fileName); // Usar el nombre de archivo generado para este usuario
+
+        // Leer el contenido HTML de la plantilla
+        string htmlContent = await System.IO.File.ReadAllTextAsync(Path.Combine(origen));
+
+        // Generar la tabla de usuarios en HTML solo para este usuario
+        StringBuilder usuarioTableHtml = new StringBuilder();
+        usuarioTableHtml.AppendLine("<tr>");
+        usuarioTableHtml.AppendLine($"<td>{usuario.Id}</td>");
+        usuarioTableHtml.AppendLine($"<td>{usuario.Name}</td>");
+        usuarioTableHtml.AppendLine($"<td>{usuario.Age}</td>");
+        usuarioTableHtml.AppendLine("</tr>");
+
+        // Reemplazar el marcador de posición con la tabla de usuario
+        htmlContent = htmlContent.Replace("{{usuarios_table}}", usuarioTableHtml.ToString());
+        htmlContent = htmlContent.Replace("{{fecha}}", DateTime.Now.ToString("dd-MM-yyyy"));
+
+        byte[] htmlBytes = Encoding.UTF8.GetBytes(htmlContent);
+
+        // Crear un MemoryStream a partir de los bytes del HTML modificado
+        using (MemoryStream htmlMemoryStream = new MemoryStream(htmlBytes))
+        {
+            // Convertir HTML a PDF
+            using (FileStream pdfStream = new FileStream(pdfDest, FileMode.Create))
+            {
+                // Usar el MemoryStream para convertir el HTML modificado a PDF
+                HtmlConverter.ConvertToPdf(htmlMemoryStream, pdfStream);
+            }
+        }
+
+        // Devolver el archivo PDF generado como resultado
+        byte[] pdfBytes = System.IO.File.ReadAllBytes(pdfDest);
+        return File(pdfBytes, "application/pdf", fileName);
     }
 
 }
