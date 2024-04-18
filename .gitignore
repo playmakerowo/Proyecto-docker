@@ -1,0 +1,11 @@
+# .NET
+# Carpeta de compilación
+/bin/
+/obj/
+/.mono/
+
+# Paquetes NuGet
+*.nuget.props
+*.paket.props
+*.paket.targets
+**/packages/*
