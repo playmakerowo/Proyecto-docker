@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "/app/Slamdunk.WebApi/Slamdunk.WebApi.csproj": {}
+    "/home/jorge/frontAngular/backend/Slamdunk.WebApi.csproj": {}
   },
   "projects": {
-    "/app/Slamdunk.WebApi/Slamdunk.WebApi.csproj": {
+    "/home/jorge/frontAngular/backend/Slamdunk.WebApi.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/app/Slamdunk.WebApi/Slamdunk.WebApi.csproj",
+        "projectUniqueName": "/home/jorge/frontAngular/backend/Slamdunk.WebApi.csproj",
         "projectName": "Slamdunk.WebApi",
-        "projectPath": "/app/Slamdunk.WebApi/Slamdunk.WebApi.csproj",
-        "packagesPath": "/root/.nuget/packages/",
-        "outputPath": "/app/Slamdunk.WebApi/obj/",
+        "projectPath": "/home/jorge/frontAngular/backend/Slamdunk.WebApi.csproj",
+        "packagesPath": "/home/jorge/.nuget/packages/",
+        "outputPath": "/home/jorge/frontAngular/backend/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/root/.nuget/NuGet/NuGet.Config"
+          "/home/jorge/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
@@ -32,11 +32,6 @@
           "warnAsError": [
             "NU1605"
           ]
-        },
-        "restoreAuditProperties": {
-          "enableAudit": "true",
-          "auditLevel": "low",
-          "auditMode": "direct"
         }
       },
       "frameworks": {
@@ -97,7 +92,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/8.0.203/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/lib/dotnet/sdk/8.0.103/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

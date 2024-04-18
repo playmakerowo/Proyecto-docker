@@ -14,11 +14,4 @@ namespace Models
         [Column("edad")]
         public int Age { get; set; }
     }
-
-    public class Images
-    {
-        public int Id { get; set; }
-        public string? NombreImagen { get; set; }
-        public byte[]? Imagen { get; set; }
-    }
 }

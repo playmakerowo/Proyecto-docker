@@ -16,10 +16,29 @@ namespace Slamdunk.WebApi.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "8.0.3")
+                .HasAnnotation("ProductVersion", "8.0.4")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
+
+            modelBuilder.Entity("Models.Images", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<byte[]>("Imagen")
+                        .HasColumnType("bytea");
+
+                    b.Property<string>("NombreImagen")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("images");
+                });
 
             modelBuilder.Entity("Models.User", b =>
                 {
