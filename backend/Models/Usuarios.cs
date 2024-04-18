@@ -15,9 +15,10 @@ namespace Models
         public int Age { get; set; }
     }
 
-    public class FileModel
+    public class Images
     {
-        public string FileName { get; set; }
-        public IFormFile File { get; set; }
+        public int Id { get; set; }
+        public string? NombreImagen { get; set; }
+        public byte[]? Imagen { get; set; }
     }
 }

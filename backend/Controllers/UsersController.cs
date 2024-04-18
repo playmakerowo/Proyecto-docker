@@ -259,4 +259,26 @@ public class UsersController : ControllerBase
         return File(pdfBytes, "application/pdf", fileName);
     }
 
+    //ejemplo pdf
+    [HttpGet("PdfEjemplo")]
+    public async Task<ActionResult> GetPdfEjemplo()
+    {
+        // Variables para definir el destino del PDF
+        string fileName = "EJEMPLO.pdf";
+        string directoryPath = Path.Combine(Directory.GetCurrentDirectory(), "archivos-pdf");
+        string filePath = Path.Combine(directoryPath, fileName);
+
+        // Crear la carpeta si no existe
+        Directory.CreateDirectory(directoryPath);
+
+        // Crear el contenido del PDF y guardarlo en disco
+        Document doc = new Document();
+        PdfWriter.GetInstance(doc, new FileStream(filePath, FileMode.Create));
+        doc.Open();
+        doc.Add(new Paragraph("Linea de prueba para el PDF"));
+        doc.Close();
+
+        // Devolver el archivo PDF como resultado
+        return PhysicalFile(filePath, "application/pdf", fileName);
+    }
 }

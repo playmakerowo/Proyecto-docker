@@ -234,3 +234,4 @@
 /app/Slamdunk.WebApi/bin/Debug/net8.0/Microsoft.DotNet.PlatformAbstractions.dll
 /app/Slamdunk.WebApi/bin/Debug/net8.0/BouncyCastle.Cryptography.dll
 /app/Slamdunk.WebApi/bin/Debug/net8.0/itext.bouncy-castle-adapter.dll
+/app/Slamdunk.WebApi/bin/Debug/net8.0/Slamdunk.WebApi.staticwebassets.runtime.json

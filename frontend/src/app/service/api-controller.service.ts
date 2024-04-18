@@ -11,6 +11,9 @@ export class ApiControllerService {
   private apiGetUser = 'http://localhost:5214/api/Users/'; //es la misma ruta para eliminar, modificar y buscar
   private apiGetUserPdf = 'http://localhost:5214/api/Users/pdfHtml/';
 
+  //API de imagenes
+  private apiImages = 'http://localhost:5214/api/Images/UploadLocal';
+
   constructor(private http: HttpClient) { }
 
   getUsers(): Observable<Users[]> {
@@ -39,5 +42,17 @@ export class ApiControllerService {
 
   getUserPdf(id: number): Observable<Blob> {
     return this.http.get(this.apiGetUserPdf + id, { responseType: 'blob' });
+  }
+
+  getImagen(nombre: string): Observable<Blob> {
+    return this.http.get(this.apiImages + nombre, { responseType: 'blob' });
+  }
+
+  postImagen(nombre: string, archivo: File): Observable<any> {
+    const formData: FormData = new FormData();
+    formData.append('FileName', nombre);
+    formData.append('File', archivo, archivo.name);
+
+    return this.http.post<any>(this.apiImages, formData);
   }
 }
