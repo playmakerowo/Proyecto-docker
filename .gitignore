@@ -1,11 +1,4 @@
-# .NET
-# Carpeta de compilación
-/bin/
-/obj/
-/.mono/
-
-# Paquetes NuGet
-*.nuget.props
-*.paket.props
-*.paket.targets
-**/packages/*
+# Ignorar archivos y carpetas dentro de la carpeta "backend"
+/backend/.mono/registry/CurrentUser/software/microsoft/csdevkit
+/backend/bin/Debug/net8.0
+/backend/obj
